@@ -6,8 +6,8 @@
     $type = $_POST['prodType'];
     header('Content-Type: application/json');
   $dbHost = 'localhost';
-$dbUsername = 'fliyjlmy_bradyDS';
-$dbPassword = 'buddy13';
+$dbUsername = '';
+$dbPassword = '';
 $dbName = 'fliyjlmy_dsgInv';
 //Create connection and select DB
 $db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
