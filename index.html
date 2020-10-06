@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/css/mdb.min.css" rel="stylesheet">
+
+    <title>Deb's Shoe Gallery Inventory Addition</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#2b5797">
+  <meta name="theme-color" content="#ffffff">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="description" content="Markovich Web Solutions is a web development company located in Sarnia, Ontario aiming to help businesses make the most of their online presence. Services include web design, development, consulting, digital marketing, and maintenance.">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="dsg.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    
+</head>
+<body>
+     <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center"><strong>Deb's Shoe Gallery</strong></h5>
+            <h5 class="card-title text-center">Inventory Submission</h5>
+            <form class="form-signin" enctype="multipart/form-data" action="upload.php" method="POST" id="invForm" name="invForm" onsubmit="return validateForm2()">
+              <div class="form-label-group">
+                <input type="text" id="inputName" name="invName" class="form-control" placeholder="Name" required autofocus>
+                <label for="inputName">Name</label>
+              </div>
+
+              <div class="form-label-group">
+                <input type="text" id="inputBrand" name="invBrand" class="form-control" placeholder="Brand" required>
+                <label for="inputBrand">Brand</label>
+              </div>
+
+              <select class="custom-select custom-select-md" id="typeSelector" name="prodType" required>
+                <option selected hidden disabled>Product Type</option>
+                <option value="Shoes">Shoes</option>
+                <option value="Boots">Boots</option>
+                <option value="Sandals">Sandals</option>
+                <option value="Accessories">Accessories</option>
+              </select>
+
+              <div class="form-label-group">
+                    <textarea id="inputDescription" class="form-control" name="invDesc" placeholder="Description" rows="5" required></textarea>
+                </div>
+
+                <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">$</span>
+                        </div>
+                        <input class="form-control" type="text" name="currency-field" id="currency-field" value="" data-type="currency" placeholder="100.00">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleFormControlFile1">Upload a picture</label>
+                        <input type="file" name="uploadimage" class="form-control-file" id="exampleFormControlFile1">
+                      </div>
+
+                      <input type="submit" class="btn btn-primary"/>
+              </form>
+            <div class="err" id="err"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.0/js/mdb.min.js"></script>
+<!-- Bootsrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script>
+
+  // Jquery Dependency
+
+$("input[data-type='currency']").on({
+    keyup: function() {
+      formatCurrency($(this));
+    },
+    blur: function() { 
+      formatCurrency($(this), "blur");
+    }
+});
+
+
+function formatNumber(n) {
+  // format number 1000000 to 1,234,567
+  return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g,"")
+}
+
+
+function formatCurrency(input, blur) {
+  // appends $ to value, validates decimal side
+  // and puts cursor back in right position.
+  
+  // get input value
+  var input_val = input.val();
+  
+  // don't validate empty input
+  if (input_val === "") { return; }
+  
+  // original length
+  var original_len = input_val.length;
+
+  // initial caret position 
+  var caret_pos = input.prop("selectionStart");
+    
+  // check for decimal
+  if (input_val.indexOf(".") >= 0) {
+
+    // get position of first decimal
+    // this prevents multiple decimals from
+    // being entered
+    var decimal_pos = input_val.indexOf(".");
+
+    // split number by decimal point
+    var left_side = input_val.substring(0, decimal_pos);
+    var right_side = input_val.substring(decimal_pos);
+
+    // add commas to left side of number
+    left_side = formatNumber(left_side);
+
+    // validate right side
+    right_side = formatNumber(right_side);
+    
+    // On blur make sure 2 numbers after decimal
+    if (blur === "blur") {
+      right_side += "00";
+    }
+    
+    // Limit decimal to only 2 digits
+    right_side = right_side.substring(0, 2);
+
+    // join number by .
+    input_val = left_side + "." + right_side;
+
+  } else {
+    // no decimal entered
+    // add commas to number
+    // remove all non-digits
+    input_val = formatNumber(input_val);
+    input_val = input_val;
+    
+    // final formatting
+    if (blur === "blur") {
+      input_val += ".00";
+    }
+  }
+  
+  // send updated string to input
+  input.val(input_val);
+
+  // put caret back in the right position
+  var updated_len = input_val.length;
+  caret_pos = updated_len - original_len + caret_pos;
+  input[0].setSelectionRange(caret_pos, caret_pos);
+}
+
+function validateForm() {
+
+document.getElementById('err').innerHTML = "Sending...";
+        formData = {
+        'invName'     : $('input[name=invName]').val(),
+        'invBrand'    : $('input[name=invBrand]').val(),
+        'invDesc'     : $('textarea[name=invDesc]').val(),
+        'currency-field'  : $('input[name=currency-field]').val(),
+        'uploadimage' : $('input[name=uploadimage]').val()
+        };
+
+  $.ajax({
+        url : "upload.php",
+        type: "POST",
+        data : formData,
+        success: function(data, textStatus, jqXHR)
+        {
+
+        $('#err').text(data.message);
+        if (data.code) //If mail was sent successfully, reset the form.
+        $('#invForm').closest('form').find("input[type=text],input[type=file], textarea").val("");
+          if (data.code === 1){
+            document.getElementById("err").style.color = "green";
+          }
+          else{
+            document.getElementById("err").style.color = "red";
+          }
+        
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+        $('#err').text(jqXHR);
+        document.getElementById("err").style.color = "red";
+        }
+        });
+
+      }
+
+      function validateForm2() {
+  var x = document.forms["invForm"]["prodType"].value;
+  if (x == "Product Type") {
+    document.getElementById("err").innerHTML = "Product Type must be entered"
+    document.getElementById("err").style.color = "red";
+    return false;
+  }
+}
+
+
+</script>
+</body>
+</html>
